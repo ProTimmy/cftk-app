@@ -76,6 +76,7 @@ export default class LoginScreen extends React.Component {
   }
 
   someFunction () {
+    Keyboard.dismiss()
     if (this.state.username !== '') {
       if (this.state.password !== '') {
         Animated.timing(
@@ -85,10 +86,17 @@ export default class LoginScreen extends React.Component {
             duration: 500
           }
         ).start()
+
         login(this.state.username, this.state.password).then(response => {
-          this.setState({
-            errorMessage: response
-          })
+          if (response.status) {
+            this.props.navigation.navigate('Main', {
+              consID: response.id
+            })
+          } else {
+            this.setState({
+              errorMessage: response.code
+            })
+          }
         })
       }
     }

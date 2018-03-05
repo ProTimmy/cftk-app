@@ -19,6 +19,8 @@ export default class HomeScreen extends React.Component {
   };
 
   render () {
+    const { params } = this.props.navigation.state
+    const consID = params.consID
     return (
       <View style={styles.container}>
         <ScrollView style={styles.container} contentContainerStyle={styles.contentContainer}>
@@ -32,7 +34,7 @@ export default class HomeScreen extends React.Component {
           <View style={styles.getStartedContainer}>
             {this._maybeRenderDevelopmentModeWarning()}
 
-            <Text style={styles.getStartedText}>Get started by pooping</Text>
+            <Text style={styles.getStartedText}>{consID}</Text>
 
             <View style={[styles.codeHighlightContainer, styles.homeScreenFilename]}>
               <MonoText style={styles.codeHighlightText}>screens/HomeScreen.js</MonoText>
