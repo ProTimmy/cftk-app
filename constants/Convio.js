@@ -1,4 +1,4 @@
-// import axios from 'axios'
+/* global fetch */
 
 // Declare global variables
 const API_KEY = 'uncdm'
@@ -35,11 +35,20 @@ export function login (username, password) {
   return sendRequest(loginRequest, loginParameters, loginRequestMethod).then(function (loginResponse) {
     if (loginResponse.loginResponse) {
       var consID = loginResponse.loginResponse.cons_id
-      return consID
+      return {
+        status: true,
+        id: consID
+      }
     } else if (loginResponse.errorResponse) {
-      return 'Error'
+      return {
+        status: false,
+        code: 'Error'
+      }
     } else {
-      return 'Request error'
+      return {
+        status: false,
+        code: 'Request error'
+      }
     }
   })
 }
