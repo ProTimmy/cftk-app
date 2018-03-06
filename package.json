@@ -18,6 +18,7 @@
     "babel-eslint": "^8.2.2",
     "jest-expo": "^25.0.0",
     "react-native-cookies": "^3.2.0",
+    "react-native-fbsdk": "^0.7.0",
     "standard": "^11.0.0"
   },
   "standard": {
