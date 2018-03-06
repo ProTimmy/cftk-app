@@ -11,7 +11,7 @@ import {
   TouchableOpacity,
   Platform
 } from 'react-native'
-import { login } from '../constants/Convio'
+import { login } from '../api/Convio'
 import Colors from '../constants/Colors'
 import Layout from '../constants/Layout'
 

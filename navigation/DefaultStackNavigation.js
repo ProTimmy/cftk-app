@@ -1,6 +1,6 @@
 import { StackNavigator } from 'react-navigation'
 import LoginScreen from '../screens/LoginScreen'
-import HomeScreen from '../screens/HomeScreen'
+import MainTabNavigator from './MainTabNavigator'
 
 export default StackNavigator(
   {
@@ -11,7 +11,7 @@ export default StackNavigator(
       }
     },
     Main: {
-      screen: HomeScreen,
+      screen: MainTabNavigator,
       navigationOptions: {
         header: null
       }
