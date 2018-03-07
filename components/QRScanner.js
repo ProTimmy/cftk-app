@@ -15,7 +15,8 @@ import { BarCodeScanner, Permissions } from 'expo'
 export default class QRScanner extends Component {
   state = {
     hasCameraPermission: null,
-    lastScannedUrl: null
+    lastScannedUrl: null,
+    points: 0
   };
 
   componentDidMount () {
@@ -32,7 +33,13 @@ export default class QRScanner extends Component {
   _handleBarCodeRead = result => {
     if (result.data !== this.state.lastScannedUrl) {
       LayoutAnimation.spring()
-      this.setState({ lastScannedUrl: result.data })
+
+      let points = JSON.parse(result.data)
+      console.log(points.points)
+      this.setState({
+        lastScannedUrl: result.data,
+        lastScannedPoints: points.points
+      })
     }
   };
 
@@ -58,21 +65,6 @@ export default class QRScanner extends Component {
     )
   }
 
-  _handlePressUrl = () => {
-    Alert.alert(
-      'Open this URL?',
-      this.state.lastScannedUrl,
-      [
-        {
-          text: 'Yes',
-          onPress: () => Linking.openURL(this.state.lastScannedUrl)
-        },
-        { text: 'No', onPress: () => {} }
-      ],
-      { cancellable: false }
-    )
-  };
-
   _handlePressCancel = () => {
     this.setState({ lastScannedUrl: null })
   };
@@ -84,9 +76,9 @@ export default class QRScanner extends Component {
 
     return (
       <View style={styles.bottomBar}>
-        <TouchableOpacity style={styles.url} onPress={this._handlePressUrl}>
+        <TouchableOpacity style={styles.url}>
           <Text numberOfLines={1} style={styles.urlText}>
-            {this.state.lastScannedUrl}
+            Congrats, you got {this.state.lastScannedPoints} points!
           </Text>
         </TouchableOpacity>
         <TouchableOpacity

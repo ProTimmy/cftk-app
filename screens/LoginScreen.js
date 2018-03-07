@@ -117,7 +117,9 @@ export default class LoginScreen extends React.Component {
             />
           </View>
           <View style={{flex: 1}}>
-            <Text style={styles.error}>{this.state.errorMessage}</Text>
+            <View style={styles.error}>
+              <Text style={styles.errorMessage}>{this.state.errorMessage}</Text>
+            </View>
             <TextInput
               value={this.state.username}
               placeholder='Username'
@@ -184,5 +186,14 @@ const styles = StyleSheet.create({
     justifyContent: 'center',
     height: 50,
     backgroundColor: Colors.carolinaBlue
+  },
+  error: {
+    paddingBottom: 10,
+    justifyContent: 'center',
+    alignItems: 'center'
+  },
+  errorMessage: {
+    color: 'red',
+    fontWeight: 'bold'
   }
 })
