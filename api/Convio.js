@@ -42,12 +42,12 @@ export function login (username, password) {
     } else if (loginResponse.errorResponse) {
       return {
         status: false,
-        code: 'Error'
+        code: 'Incorrect username or password...'
       }
     } else {
       return {
         status: false,
-        code: 'Request error'
+        code: 'There was a problem connecting to our database...'
       }
     }
   })
@@ -62,6 +62,11 @@ export function getDancerInfo (consID) {
   var dancerName = getName(consID)
 
   var dancerInfoRequest = 'https://secure2.convio.net/' + API_KEY + '/site/CRConsAPI'
+  var requestParameters = 
+
+  getName(consID).then(function (response) {
+
+  })
 }
 
 function getName (consID) {
