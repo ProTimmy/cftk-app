@@ -17,7 +17,7 @@ export default class QRScanner extends Component {
     hasCameraPermission: null,
     lastScannedUrl: null,
     points: 0
-  };
+  }
 
   componentDidMount () {
     this._requestCameraPermission()
@@ -28,20 +28,21 @@ export default class QRScanner extends Component {
     this.setState({
       hasCameraPermission: status === 'granted'
     })
-  };
+  }
 
-  _handleBarCodeRead = result => {
+  readQR = result => {
     if (result.data !== this.state.lastScannedUrl) {
       LayoutAnimation.spring()
 
       let points = JSON.parse(result.data)
-      console.log(points.points)
+      let newPoints = points.points + this.state.points
       this.setState({
         lastScannedUrl: result.data,
-        lastScannedPoints: points.points
+        lastScannedPoints: points.points,
+        points: newPoints
       })
     }
-  };
+  }
 
   render () {
     return (
@@ -53,7 +54,7 @@ export default class QRScanner extends Component {
                   Camera permission is not granted
             </Text>
             : <BarCodeScanner
-              onBarCodeRead={this._handleBarCodeRead}
+              onBarCodeRead={this.readQR}
               style={{
                 height: Dimensions.get('window').height,
                 width: Dimensions.get('window').width
