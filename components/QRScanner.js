@@ -60,17 +60,29 @@ export default class QRScanner extends Component {
                 width: Dimensions.get('window').width
               }}
               barCodeTypes={[BarCodeScanner.Constants.BarCodeType.qr]}
-            />}
-        {this._maybeRenderUrl()}
+            />
+        }
+        {this.renderPoints()}
+        {this.renderScore()}
       </View>
     )
   }
 
   _handlePressCancel = () => {
     this.setState({ lastScannedUrl: null })
-  };
+  }
 
-  _maybeRenderUrl = () => {
+  renderScore = () => {
+    return (
+      <View style={styles.topBar}>
+        <Text numberOfLines={1} style={styles.urlText}>
+          Points: {this.state.points}
+        </Text>
+      </View>
+    )
+  }
+
+  renderPoints = () => {
     if (!this.state.lastScannedUrl) {
       return
     }
@@ -86,12 +98,12 @@ export default class QRScanner extends Component {
           style={styles.cancelButton}
           onPress={this._handlePressCancel}>
           <Text style={styles.cancelButtonText}>
-            Cancel
+            OK
           </Text>
         </TouchableOpacity>
       </View>
     )
-  };
+  }
 }
 
 const styles = StyleSheet.create({
@@ -100,6 +112,15 @@ const styles = StyleSheet.create({
     alignItems: 'center',
     justifyContent: 'center',
     backgroundColor: '#000'
+  },
+  topBar: {
+    position: 'absolute',
+    top: 0,
+    left: 0,
+    right: 0,
+    backgroundColor: 'rgba(0,0,0,0.5)',
+    padding: 15,
+    flexDirection: 'row'
   },
   bottomBar: {
     position: 'absolute',

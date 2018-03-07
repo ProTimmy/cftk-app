@@ -62,7 +62,12 @@ export function getDancerInfo (consID) {
   var dancerName = getName(consID)
 
   var dancerInfoRequest = 'https://secure2.convio.net/' + API_KEY + '/site/CRConsAPI'
-  var requestParameters = 
+  var requestParameters = 'method=login&' +
+  'api_key=' + API_KEY + '&' +
+  'v=1.0&' +
+  'response_format=json&' +
+  'user_name=' + username + '&' +
+  'password=' + password
 
   getName(consID).then(function (response) {
 

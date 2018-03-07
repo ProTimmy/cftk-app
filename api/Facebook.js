@@ -1,4 +1,4 @@
-// import {  } from 'react-native-fbsdk'
+/* global fetch */
 var facebook = require('../facebookAPI.json')
 
 /** IMPORTANT: People at Facebook are kinda dumb
@@ -8,7 +8,8 @@ var facebook = require('../facebookAPI.json')
  *
  */
 
-const eventsRequest = 'https://graph.facebook.com/v2.9/carolinaftk/events?access_token=' +
+const eventsRequest = 'https://graph.facebook.com/v2.9/carolinaftk/events'
+const eventsParameter = '?access_token=' +
   getClientID() + '|' + getClientSecret() + '&limit=10'
 
 function getClientID () {
@@ -17,4 +18,28 @@ function getClientID () {
 
 function getClientSecret () {
   return facebook.client_secret
+}
+
+function sendRequest (request, parameters, requestMethod) {
+  return fetch(request, {
+    method: requestMethod,
+    headers: {
+      'Content-Type': 'application/x-www-form-urlencoded; charset=UTF-8'
+    },
+    body: parameters
+  }).then((res) => {
+    // De-stringify JSON response
+    var response = JSON.parse(res._bodyText)
+
+    // DEV
+    // console.log(response)
+
+    return response
+  })
+}
+
+export function getEvents () {
+  return sendRequest(eventsRequest, eventsParameter, 'GET').then(function (response) {
+    return response
+  })
 }
