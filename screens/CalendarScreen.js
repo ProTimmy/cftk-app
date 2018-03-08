@@ -4,12 +4,16 @@ import {
   ScrollView,
   StyleSheet
 } from 'react-native'
-import { ExpoLinksView } from '@expo/samples'
+import getEvents from '../api/Facebook'
 
 export default class LinksScreen extends React.Component {
   static navigationOptions = {
     title: 'Events'
-  };
+  }
+
+  componentDidMount () {
+    console.log(getEvents())
+  }
 
   render () {
     const facebookDate = new Date('2018-03-23T19:00:00-04:00')

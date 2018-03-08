@@ -9,8 +9,6 @@ var facebook = require('../facebookAPI.json')
  */
 
 const eventsRequest = 'https://graph.facebook.com/v2.9/carolinaftk/events'
-const eventsParameter = '?access_token=' +
-  getClientID() + '|' + getClientSecret() + '&limit=10'
 
 function getClientID () {
   return facebook.client_id
@@ -39,6 +37,8 @@ function sendRequest (request, parameters, requestMethod) {
 }
 
 export function getEvents () {
+  var eventsParameter = '?access_token=' +
+    getClientID() + '|' + getClientSecret() + '&limit=10'
   return sendRequest(eventsRequest, eventsParameter, 'GET').then(function (response) {
     return response
   })

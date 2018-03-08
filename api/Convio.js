@@ -59,15 +59,14 @@ export function logout () {
 
 export function getDancerInfo (consID) {
   console.log(consID)
-  var dancerName = getName(consID)
 
   var dancerInfoRequest = 'https://secure2.convio.net/' + API_KEY + '/site/CRConsAPI'
-  var requestParameters = 'method=login&' +
+  var requestParameters = 'method=getParticipantProgress&' +
     'api_key=' + API_KEY + '&' +
     'v=1.0&' +
     'response_format=json&' +
-    'user_name=' + username + '&' +
-    'password=' + password
+    'cons_id=' + consID + '&' +
+    'fr_id=' + EVENT_ID
 
   return getName(consID).then(function (nameResponse) {
     return sendRequest(dancerInfoRequest, requestParameters, 'POST').then(function (infoResponse) {
