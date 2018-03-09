@@ -19,12 +19,12 @@ function getClientSecret () {
 }
 
 function sendRequest (request, parameters, requestMethod) {
+  request += parameters
   return fetch(request, {
     method: requestMethod,
     headers: {
       'Content-Type': 'application/x-www-form-urlencoded; charset=UTF-8'
-    },
-    body: parameters
+    }
   }).then((res) => {
     // De-stringify JSON response
     var response = JSON.parse(res._bodyText)
@@ -40,6 +40,18 @@ export function getEvents () {
   var eventsParameter = '?access_token=' +
     getClientID() + '|' + getClientSecret() + '&limit=10'
   return sendRequest(eventsRequest, eventsParameter, 'GET').then(function (response) {
-    return response
+    var events = []
+    for (var i = 0; i < response.data.length; i++) {
+      var event = {}
+      if (response.data[i].hasOwnProperty('place')) {
+        event.name = response.data[i].name
+        event.start_time = response.data[i].start_time
+        event.end_time = response.data[i].end_time
+        event.place = response.data[i].place.name
+
+        events.push(event)
+      }
+    }
+    return events
   })
 }
