@@ -38,15 +38,32 @@ export default class CalendarScreen extends React.Component {
 
   render () {
     return (
-      <ScrollView style={styles.container}>
-        {this.state.events.map(event => <CalendarEvent key={event.name} event={event} />)}
-      </ScrollView>
+      <View style={styles.container}>
+        <Text style={styles.title}>Upcoming Events</Text>
+        <ScrollView style={styles.eventsContainer}>
+          {this.state.events.map(event => <CalendarEvent key={event.name} event={event} />)}
+        </ScrollView>
+      </View>
     )
   }
 }
 
 const styles = StyleSheet.create({
   container: {
+    flex: 1,
+    backgroundColor: '#fff',
+    paddingBottom: 10
+  },
+  title: {
+    fontWeight: 'bold',
+    fontSize: 24,
+    textDecorationLine: 'underline',
+    textAlign: 'center',
+    justifyContent: 'center',
+    paddingTop: 20,
+    paddingBottom: 20
+  },
+  eventsContainer: {
     flex: 1,
     paddingTop: 15,
     backgroundColor: '#fff'
