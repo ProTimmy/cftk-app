@@ -1,38 +1,45 @@
 import React from 'react'
 import {
   Text,
+  View,
   ScrollView,
   StyleSheet
 } from 'react-native'
-import getEvents from '../api/Facebook'
+import { getEvents } from '../api/Facebook'
+import CalendarEvent from '../components/CalendarEvent'
 
-export default class LinksScreen extends React.Component {
+export default class CalendarScreen extends React.Component {
   static navigationOptions = {
     title: 'Events'
   }
 
-  componentDidMount () {
-    console.log(getEvents())
+  constructor (props) {
+    super(props)
+
+    this.state = {
+      events: []
+    }
+  }
+
+  componentWillMount () {
+    let that = this
+    getEvents().then(function (response) {
+      let events = []
+      for (var i = 0; i < response.length; i++) {
+        let event = response[i]
+        events = [event].concat(events)
+      }
+
+      that.setState({
+        events: events
+      })
+    })
   }
 
   render () {
-    const facebookDate = new Date('2018-03-23T19:00:00-04:00')
-    const date = new Date()
-
-    let string
-    if (facebookDate.getTime() > date.getTime()) {
-      string = 'True'
-    } else {
-      string = 'False'
-    }
-
     return (
       <ScrollView style={styles.container}>
-        {/* Go ahead and delete ExpoLinksView and replace it with your
-           * content, we just wanted to provide you with some helpful links */}
-        <Text>{facebookDate.getTime()}</Text>
-        <Text>{date.getTime()}</Text>
-        <Text>{string}</Text>
+        {this.state.events.map(event => <CalendarEvent key={event.name} event={event} />)}
       </ScrollView>
     )
   }

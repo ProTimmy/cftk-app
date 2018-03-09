@@ -44,12 +44,14 @@ export function getEvents () {
     for (var i = 0; i < response.data.length; i++) {
       var event = {}
       if (response.data[i].hasOwnProperty('place')) {
-        event.name = response.data[i].name
-        event.start_time = response.data[i].start_time
-        event.end_time = response.data[i].end_time
-        event.place = response.data[i].place.name
+        if ((new Date(response.data[i].end_time).getTime() < (new Date()).getTime())) {
+          event.name = response.data[i].name
+          event.start_time = response.data[i].start_time
+          event.end_time = response.data[i].end_time
+          event.place = response.data[i].place.name
 
-        events.push(event)
+          events.push(event)
+        }
       }
     }
     return events
