@@ -36,6 +36,13 @@ function sendRequest (request, parameters, requestMethod) {
   })
 }
 
+function parseDate (date) {
+  var position = date.length - 2
+  var parsedDate = date.substr(0, position) + ':' + date.substr(position)
+
+  return parsedDate
+}
+
 export function getEvents () {
   var eventsParameter = '?access_token=' +
     getClientID() + '|' + getClientSecret() + '&limit=10'
@@ -44,7 +51,7 @@ export function getEvents () {
     for (var i = 0; i < response.data.length; i++) {
       var event = {}
       if (response.data[i].hasOwnProperty('place')) {
-        if ((new Date(response.data[i].end_time).getTime() < (new Date()).getTime())) {
+        if ((new Date(parseDate(response.data[i].end_time))).getTime() > (new Date()).getTime()) {
           event.name = response.data[i].name
           event.start_time = response.data[i].start_time
           event.end_time = response.data[i].end_time
