@@ -1,12 +1,9 @@
 import React, { Component } from 'react'
 import {
-  Alert,
-  Linking,
   Dimensions,
   LayoutAnimation,
   Text,
   View,
-  StatusBar,
   StyleSheet,
   TouchableOpacity
 } from 'react-native'
