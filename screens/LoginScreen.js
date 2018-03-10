@@ -9,7 +9,8 @@ import {
   Keyboard,
   KeyboardAvoidingView,
   TouchableOpacity,
-  Platform
+  Platform,
+  Linking
 } from 'react-native'
 import { login } from '../api/Convio'
 import Colors from '../constants/Colors'
@@ -120,6 +121,10 @@ export default class LoginScreen extends React.Component {
             <View style={styles.error}>
               <Text style={styles.errorMessage}>{this.state.errorMessage}</Text>
             </View>
+            <TouchableOpacity style={styles.forgot}
+              onPress={() => Linking.openURL('http://uncdm.convio.net/site/UserLogin?CMD=ForgotPassword')}>
+              <Text style={styles.forgotText}>Forgot Password?</Text>
+            </TouchableOpacity>
             <TextInput
               value={this.state.username}
               placeholder='Username'
@@ -196,5 +201,13 @@ const styles = StyleSheet.create({
   errorMessage: {
     color: 'red',
     fontWeight: 'bold'
+  },
+  forgot: {
+    width: Layout.width - 50,
+    marginHorizontal: 10
+  },
+  forgotText: {
+    fontSize: 12,
+    color: Colors.charcoal
   }
 })
