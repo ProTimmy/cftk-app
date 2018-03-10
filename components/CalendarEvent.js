@@ -4,6 +4,7 @@ import {
   View,
   StyleSheet
 } from 'react-native'
+import Colors from '../constants/Colors'
 
 export default class CalendarEvent extends React.Component {
   constructor (props) {
@@ -37,6 +38,13 @@ export default class CalendarEvent extends React.Component {
     // For some reason, months are zero indexed...
     var month = newDate.getMonth() + 1
     var day = newDate.getDate()
+
+    if (month < 10) {
+      month = '0' + month
+    }
+    if (day < 10) {
+      day = '0' + day
+    }
 
     var parsedDate = month + '/' + day
 
@@ -129,7 +137,7 @@ const styles = StyleSheet.create({
     padding: 40,
     paddingRight: 20,
     paddingLeft: 20,
-    backgroundColor: 'red',
+    backgroundColor: Colors.steelBlue,
     color: 'whitesmoke',
     fontWeight: 'bold',
     borderBottomLeftRadius: 10,

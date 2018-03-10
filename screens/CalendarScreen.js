@@ -7,6 +7,7 @@ import {
 } from 'react-native'
 import { getEvents } from '../api/Facebook'
 import CalendarEvent from '../components/CalendarEvent'
+import Colors from '../constants/Colors'
 
 export default class CalendarScreen extends React.Component {
   static navigationOptions = {
@@ -57,11 +58,12 @@ const styles = StyleSheet.create({
   title: {
     fontWeight: 'bold',
     fontSize: 24,
-    textDecorationLine: 'underline',
     textAlign: 'center',
     justifyContent: 'center',
     paddingTop: 20,
-    paddingBottom: 20
+    paddingBottom: 20,
+    borderBottomWidth: 3,
+    borderBottomColor: Colors.charcoal
   },
   eventsContainer: {
     flex: 1,

@@ -31,7 +31,7 @@ export default class LoginScreen extends React.Component {
 
     this.imageHeight = new Animated.Value(IMAGE_HEIGHT)
 
-    this.someFunction = this.someFunction.bind(this)
+    this.login = this.login.bind(this)
   }
 
   componentWillMount () {
@@ -75,7 +75,7 @@ export default class LoginScreen extends React.Component {
     }).start()
   }
 
-  someFunction () {
+  login () {
     Keyboard.dismiss()
     if (this.state.username !== '') {
       if (this.state.password !== '') {
@@ -147,7 +147,7 @@ export default class LoginScreen extends React.Component {
               maxLength={30}
               underlineColorAndroid='#fff'
             />
-            <TouchableOpacity style={styles.register} onPress={this.someFunction}>
+            <TouchableOpacity style={styles.loginButton} onPress={this.login}>
               <Text style={{color: 'white'}}>Login</Text>
             </TouchableOpacity>
           </View>
@@ -179,13 +179,14 @@ const styles = StyleSheet.create({
     padding: 10,
     marginTop: 20
   },
-  register: {
+  loginButton: {
     marginBottom: 20,
     width: Layout.width - 50,
     alignItems: 'center',
     justifyContent: 'center',
     height: 50,
-    backgroundColor: Colors.carolinaBlue
+    backgroundColor: Colors.carolinaBlue,
+    borderRadius: 5
   },
   error: {
     paddingBottom: 10,
