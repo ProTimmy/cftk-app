@@ -4,6 +4,7 @@ import {
   Text,
   View
 } from 'react-native'
+import Colors from '../constants/Colors'
 import TitleText from '../components/TitleText'
 
 export default class HomeScreen extends React.Component {
@@ -16,7 +17,7 @@ export default class HomeScreen extends React.Component {
     const consID = params.consID
     return (
       <View style={styles.container}>
-        <TitleText titleText={consID} />
+        <TitleText style={styles.title}>2018 UNC Dance Marathon</TitleText>
       </View>
     )
   }
@@ -25,6 +26,6 @@ export default class HomeScreen extends React.Component {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    backgroundColor: 'white'
+    backgroundColor: Colors.background
   }
 })

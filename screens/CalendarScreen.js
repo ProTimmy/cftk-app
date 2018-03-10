@@ -7,6 +7,7 @@ import {
 } from 'react-native'
 import { getEvents } from '../api/Facebook'
 import CalendarEvent from '../components/CalendarEvent'
+import TitleText from '../components/TitleText'
 import Colors from '../constants/Colors'
 
 export default class CalendarScreen extends React.Component {
@@ -40,7 +41,7 @@ export default class CalendarScreen extends React.Component {
   render () {
     return (
       <View style={styles.container}>
-        <Text style={styles.title}>Upcoming Events</Text>
+        <TitleText style={styles.title}>Upcoming Events</TitleText>
         <ScrollView style={styles.eventsContainer}>
           {this.state.events.map(event => <CalendarEvent key={event.name} event={event} />)}
         </ScrollView>
@@ -54,16 +55,6 @@ const styles = StyleSheet.create({
     flex: 1,
     backgroundColor: '#fff',
     paddingBottom: 10
-  },
-  title: {
-    fontWeight: 'bold',
-    fontSize: 24,
-    textAlign: 'center',
-    justifyContent: 'center',
-    paddingTop: 20,
-    paddingBottom: 20,
-    borderBottomWidth: 3,
-    borderBottomColor: Colors.charcoal
   },
   eventsContainer: {
     flex: 1,
