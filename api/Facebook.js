@@ -51,7 +51,6 @@ export function getEvents () {
     for (var i = 0; i < response.data.length; i++) {
       var event = {}
       if (response.data[i].hasOwnProperty('place')) {
-        console.log(response.data[i])
         if ((new Date(parseDate(response.data[i].end_time))).getTime() > (new Date()).getTime()) {
           event.name = response.data[i].name
           event.url = response.data[i].id

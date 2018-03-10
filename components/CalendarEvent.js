@@ -2,7 +2,9 @@ import React from 'react'
 import {
   Text,
   View,
-  StyleSheet
+  StyleSheet,
+  TouchableOpacity,
+  Linking
 } from 'react-native'
 import Colors from '../constants/Colors'
 
@@ -112,16 +114,23 @@ export default class CalendarEvent extends React.Component {
     })
   }
 
+  parseURL (url) {
+    var fullURL = 'http://m.facebook.com/events/'
+    fullURL += (url + '/')
+
+    return fullURL
+  }
+
   render () {
     return (
-      <View style={styles.container}>
+      <TouchableOpacity style={styles.container} onPress={() => Linking.openURL(this.parseURL(this.props.event.url))}>
         <Text style={styles.date}>{this.state.date}</Text>
         <View style={styles.eventInfo}>
           <Text style={styles.eventName}>{this.state.name}</Text>
           <Text>{this.state.place}</Text>
           <Text>{this.state.start} - {this.state.end}</Text>
         </View>
-      </View>
+      </TouchableOpacity>
     )
   }
 }
