@@ -1,17 +1,37 @@
-import firebase from 'react-native-firebase'
+import * as firebase from 'firebase'
 
 var init = {
-  apiKey: 'AIzaSyCwCNH9_XIylVTrGLUxXoFs_mZdocFjXzg',
-  authDomain: 'cftk-mob-bidding.firebaseapp.com',
-  databaseURL: 'https://cftk-mob-bidding.firebaseio.com',
-  projectId: 'cftk-mob-bidding',
-  storageBucket: 'cftk-mob-bidding.appspot.com',
-  messagingSenderId: '106678752149'
+  apiKey: 'AIzaSyBzXsSM1JfNtfQO8Le7ZqNzAaQKEGp6jFM',
+  authDomain: 'cftk-app.firebaseapp.com',
+  databaseURL: 'https://cftk-app.firebaseio.com',
+  projectId: 'cftk-app',
+  storageBucket: 'cftk-app.appspot.com',
+  messagingSenderId: '823039755315'
+}
+const fire = firebase.initializeApp(init)
+
+export function getUserPoints (consID) {
+  return fire.database().ref('/users/' + consID).once('value', snapshot => {
+    if (snapshot.val() === null) {
+      return false
+    } else {
+      var info = snapshot.val()
+      var points = info.points
+      return points
+    }
+  })
 }
 
-const fire = firebase.initializeApp(init)
-const database = fire.database()
+export function createUser (consID, name) {
+  fire.database().ref('users/' + consID).set({
+    points: 0,
+    name: name,
+    seen: []
+  })
+}
 
-export function getUserPoints () {
-  console.log(database)
+export function updatePoints (consID, points) {
+  fire.database().ref('users/' + consID).update({
+    points: points
+  })
 }

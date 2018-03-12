@@ -9,11 +9,34 @@ import {
 } from 'react-native'
 import { BarCodeScanner, Permissions } from 'expo'
 
+import { getUserPoints, createUser } from '../api/Firebase'
+import { getName } from '../api/Convio'
+
 export default class QRScanner extends Component {
   state = {
     hasCameraPermission: null,
     lastScannedUrl: null,
+    name: '',
     points: 0
+  }
+
+  componentWillMount () {
+    var that = this
+    getUserPoints(this.props.consID).then(function (response) {
+      if (response === false) {
+        getName(this.props.consID).then(function (response) {
+          var name = response
+          createUser(this.props.consID, name)
+        })
+      } else {
+        var json = JSON.stringify(response)
+        json = JSON.parse(json)
+
+        that.setState({
+          points: json.points
+        })
+      }
+    })
   }
 
   componentDidMount () {
