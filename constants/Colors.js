@@ -6,6 +6,7 @@ export default {
   tabIconSelected: tintColor,
   tabBar: '#fefefe',
   background: '#fff',
+  statusBar: '#65B8FF',
   sunshine: '#FAF288',
   coral: '#F78A72',
   steelBlue: '#0075A3',

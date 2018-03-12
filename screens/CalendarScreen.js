@@ -1,6 +1,5 @@
 import React from 'react'
 import {
-  Text,
   View,
   ScrollView,
   StyleSheet
@@ -8,7 +7,6 @@ import {
 import { getEvents } from '../api/Facebook'
 import CalendarEvent from '../components/CalendarEvent'
 import TitleText from '../components/TitleText'
-import Colors from '../constants/Colors'
 
 export default class CalendarScreen extends React.Component {
   static navigationOptions = {
@@ -41,7 +39,7 @@ export default class CalendarScreen extends React.Component {
   render () {
     return (
       <View style={styles.container}>
-        <TitleText style={styles.title}>Upcoming Events</TitleText>
+        <TitleText style={styles.title} titleText='Upcoming Events' />
         <ScrollView style={styles.eventsContainer}>
           {this.state.events.map(event => <CalendarEvent key={event.name} event={event} />)}
         </ScrollView>

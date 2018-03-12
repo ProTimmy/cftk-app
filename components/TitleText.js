@@ -6,7 +6,6 @@ import Colors from '../constants/Colors'
 
 export default class TitleText extends React.Component {
   render () {
-    // this.props.style will override the styles declared here
     return (
       <Text style={styles.title}>{this.props.titleText}</Text>
     )
@@ -21,7 +20,14 @@ const styles = {
     justifyContent: 'center',
     paddingTop: 20,
     paddingBottom: 20,
-    borderBottomWidth: 3,
-    borderBottomColor: Colors.charcoal
+    backgroundColor: Colors.carolinaBlue,
+    elevation: 5,
+    shadowColor: '#000000',
+    shadowOffset: {
+      width: 0,
+      height: 3
+    },
+    shadowRadius: 5,
+    shadowOpacity: 1.0
   }
 }
