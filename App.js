@@ -5,6 +5,8 @@ import { Ionicons } from '@expo/vector-icons'
 
 import DefaultStackNavigation from './navigation/DefaultStackNavigation'
 
+import Colors from './constants/Colors'
+
 export default class App extends React.Component {
   constructor (props) {
     super(props)
@@ -25,7 +27,7 @@ export default class App extends React.Component {
     } else {
       return (
         <View style={styles.container}>
-          {Platform.OS === 'ios' && <StatusBar barStyle='default' />}
+          {Platform.OS === 'ios' && <StatusBar translucent backgroundColor={Colors.statusBar} barStyle='default' />}
           {Platform.OS === 'android' && <View style={styles.statusBarUnderlay} />}
           <DefaultStackNavigation />
         </View>
@@ -71,6 +73,6 @@ const styles = StyleSheet.create({
   },
   statusBarUnderlay: {
     height: 24,
-    backgroundColor: 'rgba(0,0,0,0.2)'
+    backgroundColor: Colors.statusBar
   }
 })
