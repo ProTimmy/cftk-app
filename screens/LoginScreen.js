@@ -91,7 +91,8 @@ export default class LoginScreen extends React.Component {
         login(this.state.username, this.state.password).then(response => {
           if (response.status) {
             this.props.navigation.navigate('Main', {
-              consID: response.id
+              id: response.id,
+              token: response.token
             })
           } else {
             this.setState({
