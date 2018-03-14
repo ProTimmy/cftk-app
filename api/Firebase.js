@@ -11,7 +11,7 @@ var init = {
 const fire = firebase.initializeApp(init)
 
 export function getUserPoints (consID) {
-  return fire.database().ref('/users/' + consID).once('value', snapshot => {
+  return fire.database().ref('/users/' + consID).once('value').then(function (snapshot) {
     if (snapshot.val() === null) {
       return false
     } else {
@@ -25,13 +25,22 @@ export function getUserPoints (consID) {
 export function createUser (consID, name) {
   fire.database().ref('users/' + consID).set({
     points: 0,
-    name: name,
-    seen: []
+    name: name
   })
 }
 
-export function updatePoints (consID, points) {
-  fire.database().ref('users/' + consID).update({
-    points: points
+export function updatePoints (consID, points, id) {
+  return fire.database().ref('/users/' + consID).once('value').then(function (snapshot) {
+    if (!snapshot.child(id).exists()) {
+      fire.database().ref('users/' + consID).update({
+        points: points
+      })
+
+      fire.database().ref('/users/' + consID).child(id).set('true')
+
+      return true
+    } else {
+      return false
+    }
   })
 }

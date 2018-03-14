@@ -8,14 +8,16 @@ import {
   TouchableOpacity
 } from 'react-native'
 import { BarCodeScanner, Permissions } from 'expo'
+import Layout from '../constants/Layout'
 
-import { getUserPoints, createUser } from '../api/Firebase'
+import { getUserPoints, createUser, updatePoints } from '../api/Firebase'
 import { getName } from '../api/Convio'
 
 export default class QRScanner extends Component {
   state = {
     hasCameraPermission: null,
     lastScannedUrl: null,
+    error: null,
     name: '',
     points: 0
   }
@@ -24,16 +26,12 @@ export default class QRScanner extends Component {
     var that = this
     getUserPoints(this.props.consID).then(function (response) {
       if (response === false) {
-        getName(this.props.consID).then(function (response) {
-          var name = response
-          createUser(this.props.consID, name)
+        getName(that.props.consID, that.props.token).then(function (nameResponse) {
+          createUser(that.props.consID, nameResponse)
         })
       } else {
-        var json = JSON.stringify(response)
-        json = JSON.parse(json)
-
         that.setState({
-          points: json.points
+          points: response
         })
       }
     })
@@ -51,16 +49,28 @@ export default class QRScanner extends Component {
   }
 
   readQR = result => {
+    let that = this
+
     if (result.data !== this.state.lastScannedUrl) {
       LayoutAnimation.spring()
 
       let points = JSON.parse(result.data)
       let newPoints = points.points + this.state.points
-      this.setState({
-        lastScannedUrl: result.data,
-        lastScannedPoints: points.points,
-        points: newPoints
-      })
+      if (points.token === 'carolinaftk') {
+        updatePoints(that.props.consID, newPoints, points.id).then(function (response) {
+          if (response === true) {
+            that.setState({
+              lastScannedPoints: points.points,
+              points: newPoints,
+              lastScannedUrl: result.data
+            })
+          } else {
+            that.setState({
+              error: true
+            })
+          }
+        })
+      }
     }
   }
 
@@ -84,12 +94,16 @@ export default class QRScanner extends Component {
         }
         {this.renderPoints()}
         {this.renderScore()}
+        {this.renderError()}
       </View>
     )
   }
 
   _handlePressCancel = () => {
-    this.setState({ lastScannedUrl: null })
+    this.setState({
+      lastScannedUrl: null,
+      error: null
+    })
   }
 
   renderScore = () => {
@@ -114,6 +128,27 @@ export default class QRScanner extends Component {
             Congrats, you got {this.state.lastScannedPoints} points!
           </Text>
         </TouchableOpacity>
+        <TouchableOpacity
+          style={styles.cancelButton}
+          onPress={this._handlePressCancel}>
+          <Text style={styles.cancelButtonText}>
+            OK
+          </Text>
+        </TouchableOpacity>
+      </View>
+    )
+  }
+
+  renderError = () => {
+    if (!this.state.error) {
+      return
+    }
+
+    return (
+      <View style={styles.errorBar}>
+        <Text style={[styles.urlText, {paddingBottom: 5}]}>
+          Sorry, this code has already been scanned!
+        </Text>
         <TouchableOpacity
           style={styles.cancelButton}
           onPress={this._handlePressCancel}>
@@ -151,12 +186,23 @@ const styles = StyleSheet.create({
     padding: 15,
     flexDirection: 'row'
   },
+  errorBar: {
+    position: 'absolute',
+    backgroundColor: 'rgba(0,0,0,0.5)',
+    padding: 15,
+    flexDirection: 'column',
+    width: Layout.width - 50,
+    alignItems: 'center',
+    justifyContent: 'center',
+    borderRadius: 5
+  },
   url: {
     flex: 1
   },
   urlText: {
     color: '#fff',
-    fontSize: 20
+    fontSize: 20,
+    textAlign: 'center'
   },
   cancelButton: {
     marginLeft: 10,

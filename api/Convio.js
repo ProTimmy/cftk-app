@@ -15,10 +15,9 @@ function sendRequest (request, parameters, requestMethod) {
     // De-stringify JSON response
     var response = JSON.parse(res._bodyText)
 
-    // DEV
-    // console.log(response)
-
     return response
+  }).catch(function (error) {
+    console.log(error)
   })
 }
 
