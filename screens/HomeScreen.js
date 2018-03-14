@@ -53,6 +53,8 @@ export default class HomeScreen extends React.Component {
         teamPercentage: teamPercentage,
         daysLeft: response.info.getParticipantProgressResponse.daysLeft
       })
+    }).catch(function (error) {
+      console.log(error)
     })
   }
 
