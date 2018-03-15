@@ -1,24 +1,40 @@
 import React from 'react'
 import {
-  View,
-  Text
+  View
 } from 'react-native'
 import QRScanner from '../components/QRScanner'
+import Timer from '../components/Timer'
 
 export default class ActivitiesScreen extends React.Component {
   constructor (props) {
     super(props)
 
-    this.finishTimer = this.finishTimer.bind(this)
+    this.state = {
+      timer: true
+    }
+
+    this.endTimer = this.endTimer.bind(this)
   }
 
-  finishTimer () {
-    window.alert('something')
+  endTimer () {
+    this.setState({
+      timer: false
+    })
   }
 
   render () {
     return (
-      <QRScanner />
+      <View>
+        { this.state.timer
+          ? <Timer
+            endTimer={this.endTimer}
+          />
+          : <QRScanner
+            consID={this.props.navigation.state.params.id}
+            token={this.props.navigation.state.params.token}
+          />
+        }
+      </View>
     )
   }
 }

@@ -14,12 +14,12 @@ import {
 const marathonDate = new Date('2018-03-23T19:30:00-04:00')
 const currentTime = (new Date()).getTime()
 
-export default class TimerScreen extends React.Component {
+export default class Timer extends React.Component {
   constructor (props) {
     super(props)
 
     this.state = {
-      timer: 0,
+      timer: currentTime,
       days: 0,
       hours: 0,
       minutes: 0,
@@ -28,21 +28,20 @@ export default class TimerScreen extends React.Component {
     }
 
     this.formatTime = this.formatTime.bind(this)
+    this.endTimer = this.endTimer.bind(this)
+    this.tick = this.tick.bind(this)
   }
 
   componentDidMount () {
-    this.setState({
-      timer: currentTime
-    })
+    this.interval = setInterval(this.tick, 1000)
+  }
 
-    let that = this
-    setInterval(function () {
-      let time = that.state.timer
-      // Add one second (in milliseconds)
-      time += 1000
+  tick () {
+    let time = this.state.timer
+    // Add one second (in milliseconds)
+    time += 1000
 
-      that.formatTime(time)
-    }, 1000)
+    this.formatTime(time)
   }
 
   formatTime (time) {
@@ -72,7 +71,7 @@ export default class TimerScreen extends React.Component {
       days = '0' + days
     }
 
-    if (distance <= 0) {
+    if (distance <= 10000000000) {
       seconds = '00'
       minutes = '00'
       hours = '00'
@@ -91,6 +90,11 @@ export default class TimerScreen extends React.Component {
     })
   }
 
+  endTimer () {
+    clearInterval(this.interval)
+    this.props.endTimer()
+  }
+
   render () {
     return (
       <View>
@@ -100,6 +104,7 @@ export default class TimerScreen extends React.Component {
         {this.state.enter
           ? <Button
             title='enter'
+            onPress={this.endTimer}
           />
           : <Text />
         }

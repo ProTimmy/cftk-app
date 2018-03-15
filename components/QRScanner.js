@@ -48,27 +48,55 @@ export default class QRScanner extends Component {
     })
   }
 
+  isJSON (data) {
+    data = typeof data !== 'string'
+      ? JSON.stringify(data)
+      : data
+
+    try {
+      data = JSON.parse(data)
+    } catch (e) {
+      return false
+    }
+
+    if (typeof data === 'object' && data !== null) {
+      return true
+    }
+
+    return false
+  }
+
   readQR = result => {
     let that = this
 
     if (result.data !== this.state.lastScannedUrl) {
       LayoutAnimation.spring()
 
-      let points = JSON.parse(result.data)
-      let newPoints = points.points + this.state.points
-      if (points.token === 'carolinaftk') {
-        updatePoints(that.props.consID, newPoints, points.id).then(function (response) {
-          if (response === true) {
-            that.setState({
-              lastScannedPoints: points.points,
-              points: newPoints,
-              lastScannedUrl: result.data
-            })
-          } else {
-            that.setState({
-              error: true
-            })
-          }
+      if (this.isJSON(result.data)) {
+        let points = JSON.parse(result.data)
+        let newPoints = points.points + this.state.points
+        if (points.token === 'carolinaftk') {
+          updatePoints(that.props.consID, newPoints, points.id).then(function (response) {
+            if (response === true) {
+              that.setState({
+                lastScannedPoints: points.points,
+                points: newPoints,
+                lastScannedUrl: result.data
+              })
+            } else {
+              that.setState({
+                error: 'QR Code already scanned!'
+              })
+            }
+          })
+        } else {
+          this.setState({
+            error: 'Invalid QR Code!'
+          })
+        }
+      } else {
+        this.setState({
+          error: 'Invalid QR Code!'
         })
       }
     }
@@ -79,15 +107,14 @@ export default class QRScanner extends Component {
       <View style={styles.container}>
         {this.state.hasCameraPermission === null
           ? <Text>Requesting for camera permission</Text>
-          : this.state.hasCameraPermission === false
-            ? <Text style={{ color: '#fff' }}>
-                  Camera permission is not granted
-            </Text>
+          : !this.state.hasCameraPermission
+            ? <Text>Camera permission is not granted</Text>
             : <BarCodeScanner
               onBarCodeRead={this.readQR}
               style={{
                 height: Dimensions.get('window').height,
-                width: Dimensions.get('window').width
+                width: Dimensions.get('window').width,
+                top: 0
               }}
               barCodeTypes={[BarCodeScanner.Constants.BarCodeType.qr]}
             />
@@ -99,7 +126,7 @@ export default class QRScanner extends Component {
     )
   }
 
-  _handlePressCancel = () => {
+  handlePressCancel = () => {
     this.setState({
       lastScannedUrl: null,
       error: null
@@ -122,15 +149,15 @@ export default class QRScanner extends Component {
     }
 
     return (
-      <View style={styles.bottomBar}>
+      <View style={styles.displayMessage}>
         <TouchableOpacity style={styles.url}>
-          <Text numberOfLines={1} style={styles.urlText}>
+          <Text style={[styles.urlText, { paddingBottom: 5 }]}>
             Congrats, you got {this.state.lastScannedPoints} points!
           </Text>
         </TouchableOpacity>
         <TouchableOpacity
           style={styles.cancelButton}
-          onPress={this._handlePressCancel}>
+          onPress={this.handlePressCancel}>
           <Text style={styles.cancelButtonText}>
             OK
           </Text>
@@ -145,13 +172,13 @@ export default class QRScanner extends Component {
     }
 
     return (
-      <View style={styles.errorBar}>
+      <View style={styles.displayMessage}>
         <Text style={[styles.urlText, {paddingBottom: 5}]}>
-          Sorry, this code has already been scanned!
+          {this.state.error}
         </Text>
         <TouchableOpacity
           style={styles.cancelButton}
-          onPress={this._handlePressCancel}>
+          onPress={this.handlePressCancel}>
           <Text style={styles.cancelButtonText}>
             OK
           </Text>
@@ -163,41 +190,34 @@ export default class QRScanner extends Component {
 
 const styles = StyleSheet.create({
   container: {
-    flex: 1,
     alignItems: 'center',
-    justifyContent: 'center',
-    backgroundColor: '#000'
+    justifyContent: 'center'
   },
   topBar: {
     position: 'absolute',
     top: 0,
-    left: 0,
     right: 0,
+    left: 0,
     backgroundColor: 'rgba(0,0,0,0.5)',
     padding: 15,
     flexDirection: 'row'
   },
-  bottomBar: {
-    position: 'absolute',
-    bottom: 0,
-    left: 0,
-    right: 0,
-    backgroundColor: 'rgba(0,0,0,0.5)',
-    padding: 15,
-    flexDirection: 'row'
-  },
-  errorBar: {
+  // displayMessage: {
+  //   position: 'absolute',
+  //   top: Dimensions.get('window').height,
+  //   left: 0,
+  //   right: 0,
+  //   backgroundColor: 'rgba(0,0,0,0.5)',
+  //   padding: 15,
+  //   flexDirection: 'row'
+  // },
+  displayMessage: {
     position: 'absolute',
     backgroundColor: 'rgba(0,0,0,0.5)',
     padding: 15,
     flexDirection: 'column',
     width: Layout.width - 50,
-    alignItems: 'center',
-    justifyContent: 'center',
     borderRadius: 5
-  },
-  url: {
-    flex: 1
   },
   urlText: {
     color: '#fff',
