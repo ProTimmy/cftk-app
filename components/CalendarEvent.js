@@ -140,7 +140,15 @@ const styles = StyleSheet.create({
     flexDirection: 'row',
     backgroundColor: 'whitesmoke',
     margin: 15,
-    borderRadius: 10
+    borderRadius: 10,
+    elevation: 5,
+    shadowColor: '#000000',
+    shadowOffset: {
+      width: 0,
+      height: 3
+    },
+    shadowRadius: 5,
+    shadowOpacity: 1.0
   },
   date: {
     padding: 40,
