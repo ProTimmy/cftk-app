@@ -1,9 +1,12 @@
 import React from 'react'
 import {
-  Button,
   Text,
-  View
+  View,
+  StyleSheet,
+  TouchableOpacity
 } from 'react-native'
+import Layout from '../constants/Layout'
+import Colors from '../constants/Colors'
 
 /**
  * Hard code value of date of marathon
@@ -20,10 +23,10 @@ export default class Timer extends React.Component {
 
     this.state = {
       timer: currentTime,
-      days: 0,
-      hours: 0,
-      minutes: 0,
-      seconds: 0,
+      days: '00',
+      hours: '00',
+      minutes: '00',
+      seconds: '00',
       enter: false
     }
 
@@ -71,7 +74,7 @@ export default class Timer extends React.Component {
       days = '0' + days
     }
 
-    if (distance <= 10000000000) {
+    if (distance <= 0) {
       seconds = '00'
       minutes = '00'
       hours = '00'
@@ -97,18 +100,97 @@ export default class Timer extends React.Component {
 
   render () {
     return (
-      <View>
-        <Text>The activities section will become available at the start of the marathon!</Text>
-        <Text>Time until the marathon:</Text>
-        <Text>{this.state.days}:{this.state.hours}:{this.state.minutes}:{this.state.seconds}</Text>
+      <View style={styles.container}>
+        <Text style={{
+          fontWeight: 'bold',
+          fontSize: 20,
+          textAlign: 'center',
+          paddingLeft: 20,
+          paddingRight: 20
+        }}>The activities section will become available at the start of the marathon!</Text>
+        <View style={styles.dateContainer}>
+          <View style={styles.date}>
+            <Text style={styles.dateHeader}>Days</Text>
+            <Text style={styles.dateBody}>{this.state.days}</Text>
+          </View>
+          <View style={styles.date}>
+            <Text style={styles.dateHeader}>Hours</Text>
+            <Text style={styles.dateBody}>{this.state.hours}</Text>
+          </View>
+          <View style={styles.date}>
+            <Text style={styles.dateHeader}>Minutes</Text>
+            <Text style={styles.dateBody}>{this.state.minutes}</Text>
+          </View>
+          <View style={styles.date}>
+            <Text style={styles.dateHeader}>Seconds</Text>
+            <Text style={styles.dateBody}>{this.state.seconds}</Text>
+          </View>
+        </View>
         {this.state.enter
-          ? <Button
-            title='enter'
-            onPress={this.endTimer}
-          />
+          ? <TouchableOpacity style={styles.button} onPress={this.endTimer}>
+            <Text style={{color: 'white'}}>Enter</Text>
+          </TouchableOpacity>
           : <Text />
         }
       </View>
     )
   }
 }
+
+const styles = StyleSheet.create({
+  container: {
+    height: Layout.height,
+    flexDirection: 'column',
+    alignItems: 'center',
+    justifyContent: 'center',
+    backgroundColor: '#fff'
+  },
+  dateContainer: {
+    flexDirection: 'row',
+    paddingTop: 20,
+    paddingBottom: 20,
+    backgroundColor: Colors.steelBlue,
+    padding: 10,
+    borderRadius: 5,
+    margin: 20,
+    elevation: 5,
+    shadowColor: '#000000',
+    shadowOffset: {
+      width: 0,
+      height: 3
+    },
+    shadowRadius: 5,
+    shadowOpacity: 1.0
+  },
+  date: {
+    paddingLeft: 10,
+    paddingRight: 10
+  },
+  dateHeader: {
+    fontWeight: 'bold',
+    fontSize: 16,
+    textAlign: 'center',
+    color: '#fff'
+  },
+  dateBody: {
+    textAlign: 'center',
+    color: '#fff'
+  },
+  button: {
+    marginBottom: 20,
+    width: Layout.width - 50,
+    alignItems: 'center',
+    justifyContent: 'center',
+    height: 50,
+    backgroundColor: Colors.carolinaBlue,
+    borderRadius: 5,
+    elevation: 5,
+    shadowColor: '#000000',
+    shadowOffset: {
+      width: 0,
+      height: 3
+    },
+    shadowRadius: 5,
+    shadowOpacity: 1.0
+  }
+})
