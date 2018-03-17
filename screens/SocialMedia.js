@@ -13,7 +13,7 @@ const MenuItem = ({title, onPress}) => (
   </TouchableOpacity>
 )
 
-export default class SettingsScreen extends React.Component {
+export default class SocialMedia extends React.Component {
   static navigationOptions = {
     header: null
   }
