@@ -110,7 +110,6 @@ export default class LoginScreen extends React.Component {
         <KeyboardAvoidingView
           style={styles.container}
           behavior='padding'
-          keyboardVerticalOffset={100}
         >
           <View style={{flex: 2, justifyContent: 'center'}}>
             <Animated.Image
@@ -118,7 +117,7 @@ export default class LoginScreen extends React.Component {
               style={[styles.logo, {height: this.imageHeight}]}
             />
           </View>
-          <View style={{flex: 1}}>
+          <View style={{flex: 1, alignItems: 'center'}}>
             <View style={styles.error}>
               <Text style={styles.errorMessage}>{this.state.errorMessage}</Text>
             </View>
