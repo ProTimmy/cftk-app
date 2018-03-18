@@ -13,7 +13,7 @@ const MenuItem = ({title, onPress}) => (
   </TouchableOpacity>
 )
 
-export default class SocialMedia extends React.Component {
+export default class SettingsScreen extends React.Component {
   static navigationOptions = {
     header: null
   }
@@ -34,7 +34,7 @@ export default class SocialMedia extends React.Component {
   render () {
     return (
       <View style={styles.container}>
-        <TitleText style={styles.title} titleText='Settings' />
+        <TitleText style={styles.title} titleText='Social Media' />
         <View style={styles.menuContainer}>
           <MenuItem title='Change fundraising goal' onPress={this.pressed} />
           <MenuItem title='Change personal page URL' />
