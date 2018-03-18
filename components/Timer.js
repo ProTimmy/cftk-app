@@ -153,14 +153,8 @@ const styles = StyleSheet.create({
     padding: 10,
     borderRadius: 5,
     margin: 20,
-    elevation: 5,
-    shadowColor: '#000000',
-    shadowOffset: {
-      width: 0,
-      height: 3
-    },
-    shadowRadius: 5,
-    shadowOpacity: 1.0
+    // Android styles only
+    elevation: 5
   },
   date: {
     paddingLeft: 10,
