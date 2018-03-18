@@ -18,16 +18,10 @@ const styles = {
     fontSize: 24,
     textAlign: 'center',
     justifyContent: 'center',
-    paddingTop: 20,
-    paddingBottom: 20,
+    padding: 40,
+    paddingTop: 50,
     backgroundColor: Colors.carolinaBlue,
-    elevation: 5,
-    shadowColor: '#000000',
-    shadowOffset: {
-      width: 0,
-      height: 3
-    },
-    shadowRadius: 5,
-    shadowOpacity: 1.0
+    // Android styles only
+    elevation: 5
   }
 }

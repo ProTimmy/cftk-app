@@ -124,7 +124,9 @@ export default class CalendarEvent extends React.Component {
   render () {
     return (
       <TouchableOpacity style={styles.container} onPress={() => Linking.openURL(this.parseURL(this.props.event.url))}>
-        <Text style={styles.date}>{this.state.date}</Text>
+        <View style={styles.date}>
+          <Text style={styles.dateText}>{this.state.date}</Text>
+        </View>
         <View style={styles.eventInfo}>
           <Text style={styles.eventName}>{this.state.name}</Text>
           <Text>{this.state.place}</Text>
@@ -138,27 +140,24 @@ export default class CalendarEvent extends React.Component {
 const styles = StyleSheet.create({
   container: {
     flexDirection: 'row',
-    backgroundColor: 'whitesmoke',
+    backgroundColor: '#f0f0f0f0',
     margin: 15,
     borderRadius: 10,
-    elevation: 5,
-    shadowColor: '#000000',
-    shadowOffset: {
-      width: 0,
-      height: 3
-    },
-    shadowRadius: 5,
-    shadowOpacity: 1.0
+    // Android styles only
+    elevation: 5
   },
   date: {
+    overflow: 'hidden',
+    borderBottomLeftRadius: 10,
+    borderTopLeftRadius: 10
+  },
+  dateText: {
     padding: 40,
     paddingRight: 20,
     paddingLeft: 20,
     backgroundColor: Colors.steelBlue,
     color: 'whitesmoke',
-    fontWeight: 'bold',
-    borderBottomLeftRadius: 10,
-    borderTopLeftRadius: 10
+    fontWeight: 'bold'
   },
   eventInfo: {
     padding: 20,
