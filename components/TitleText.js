@@ -18,8 +18,8 @@ const styles = {
     fontSize: 24,
     textAlign: 'center',
     justifyContent: 'center',
-    padding: 40,
-    paddingTop: 50,
+    padding: 30,
+    paddingTop: 45,
     backgroundColor: Colors.carolinaBlue,
     // Android styles only
     elevation: 5
