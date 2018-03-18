@@ -15,8 +15,32 @@ import ModAccordion from '../components/ModAccordion'
 
 const questions = [
   {
-    'title': '​Marathon Timeline',
-    'body': '\tDancers required to raise $200 before the Marathon, but are encouraged to and often go beyond that. Dancers stand for the entire 24 hours of the Marathon, and help with fundraising events before it.'
+    'title': '​Marathon Schedule',
+    'body': ' ●\t6:00PM - Blue, Green, Orange Team Check-In\n' +
+      ' ●\t6:15PM - Purple, Pink, White Team Check-In\n' +
+      ' ●\t6:30PM - Red, Yellow Team Check-In\n' +
+      ' ●\t7:00 PM - Stand Up\n' +
+      ' ●\t7:45 PM - Performances Begin\n' +
+      ' ●\t8:30 PM - Dinner\n' +
+      ' ●\t9:45 PM - Indoor Sports\n' +
+      ' ●\t1:00 AM - Glow in the Dark Capture the Flag\n' +
+      ' ●\t2:15 AM - Fetzer Field Day\n' +
+      ' ●\t3:30 AM - Snack\n' +
+      ' ●\t4:00 AM - Zumba\n' +
+      ' ●\t4:45 AM - Senior Hour/Dodgeball\n' +
+      ' ●\t6:30 AM - Kenan Sunrise Walk\n' +
+      ' ●\t8:00 AM - Rave\n' +
+      ' ●\t9:00 AM - Breakfast\n' +
+      ' ●\t9:45 AM - Performances\n' +
+      ' ●\t10:30 AM - Hedgehogs\n' +
+      ' ●\t11:45 AM - Yoga\n' +
+      ' ●\t12:30 PM - Lunch\n' +
+      ' ●\t2:00 PM - Tar Heel Town\n' +
+      ' ●\t4:10 PM - Final Jam\n' +
+      ' ●\t5:00 PM - KCC Talent Show\n' +
+      ' ●\t6:00 PM - Family Hour\n' +
+      ' ●\t6:50 PM - Sway Time\n' +
+      ' ●\t7:00 PM - Sit Down\n'
   },
   {
     'title': '​​When and where is the marathon?',
