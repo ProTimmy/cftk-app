@@ -73,31 +73,36 @@ export default class HomeScreen extends React.Component {
         <TitleText style={styles.title} titleText={this.state.name} />
         <View>
           <Text style={styles.days}>Days Left: {this.state.daysLeft}</Text>
-          <Text style={styles.subtitle}>Personal Fundraising</Text>
-          <View style={styles.panel}>
-            <View style={styles.information}>
-              <View style={styles.infoBlock}>
-                <Text style={styles.infoTitle}>Raised:</Text>
-                <Text>${this.state.personalRaised}</Text>
+          <View style={{borderTopWidth: 1.25, borderColor: Colors.coral}}>
+            <Text style={styles.subtitle}>Personal Fundraising</Text>
+            <View style={styles.panel}>
+              <View style={styles.information}>
+                <View style={styles.infoBlock}>
+                  <Text style={styles.infoTitle}>Raised:</Text>
+                  <Text>${this.state.personalRaised}</Text>
+                </View>
+                <View style={styles.infoBlock}>
+                  <Text style={styles.infoTitle}>Goal:</Text>
+                  <Text style={styles.infoAmount}>${this.state.personalGoal}</Text>
+                </View>
               </View>
-              <View style={styles.infoBlock}>
-                <Text style={styles.infoTitle}>Goal:</Text>
-                <Text style={styles.infoAmount}>${this.state.personalGoal}</Text>
-              </View>
-            </View>
-            <View style={styles.pieView}>
-              <Pie
-                radius={50}
-                innerRadius={40}
-                series={[this.state.personalPercentage]}
-                colors={[Colors.carolinaBlue]}
-                backgroundColor='#ccc' />
-              <View style={styles.gauge}>
-                <Text style={styles.gaugeText}>{this.state.personalPercentage}%</Text>
+              <View style={styles.pieView}>
+                <Pie
+                  radius={50}
+                  innerRadius={40}
+                  series={[this.state.personalPercentage]}
+                  colors={[Colors.carolinaBlue]}
+                  backgroundColor='#ccc' />
+                <View style={styles.gauge}>
+                  <Text style={styles.gaugeText}>{this.state.personalPercentage}%</Text>
+                </View>
               </View>
             </View>
           </View>
-          <Text style={styles.subtitle}>{this.state.teamName}</Text>
+          <View style={{borderTopWidth: 1.25, borderColor: Colors.coral}}>
+            <Text style={styles.subtitle}>{this.state.teamName}</Text>
+          </View>
+          {/* <Text style={styles.subtitle}>{this.state.teamName}</Text> */}
           <View style={styles.panel}>
             <View style={styles.information}>
               <View style={styles.infoBlock}>
@@ -137,15 +142,15 @@ const styles = StyleSheet.create({
     fontSize: 20,
     textAlign: 'center',
     justifyContent: 'center',
-    paddingTop: 10
+    padding: 20,
+    backgroundColor: '#ECECEC'
   },
   subtitle: {
     fontWeight: 'bold',
     fontSize: 22,
     textAlign: 'center',
     justifyContent: 'center',
-    paddingTop: 20,
-    textDecorationLine: 'underline'
+    paddingTop: 20
   },
   panel: {
     flexDirection: 'row',
