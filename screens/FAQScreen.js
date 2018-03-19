@@ -16,31 +16,31 @@ import ModAccordion from '../components/ModAccordion'
 const questions = [
   {
     'title': '​Marathon Schedule',
-    'body': ' ●\t6:00PM - Blue, Green, Orange Team Check-In\n' +
-      ' ●\t6:15PM - Purple, Pink, White Team Check-In\n' +
-      ' ●\t6:30PM - Red, Yellow Team Check-In\n' +
-      ' ●\t7:00 PM - Stand Up\n' +
-      ' ●\t7:45 PM - Performances Begin\n' +
-      ' ●\t8:30 PM - Dinner\n' +
-      ' ●\t9:45 PM - Indoor Sports\n' +
-      ' ●\t1:00 AM - Glow in the Dark Capture the Flag\n' +
-      ' ●\t2:15 AM - Fetzer Field Day\n' +
-      ' ●\t3:30 AM - Snack\n' +
-      ' ●\t4:00 AM - Zumba\n' +
-      ' ●\t4:45 AM - Senior Hour/Dodgeball\n' +
-      ' ●\t6:30 AM - Kenan Sunrise Walk\n' +
-      ' ●\t8:00 AM - Rave\n' +
-      ' ●\t9:00 AM - Breakfast\n' +
-      ' ●\t9:45 AM - Performances\n' +
-      ' ●\t10:30 AM - Hedgehogs\n' +
-      ' ●\t11:45 AM - Yoga\n' +
-      ' ●\t12:30 PM - Lunch\n' +
-      ' ●\t2:00 PM - Tar Heel Town\n' +
-      ' ●\t4:10 PM - Final Jam\n' +
-      ' ●\t5:00 PM - KCC Talent Show\n' +
-      ' ●\t6:00 PM - Family Hour\n' +
-      ' ●\t6:50 PM - Sway Time\n' +
-      ' ●\t7:00 PM - Sit Down\n'
+    'body': '6:00PM - Blue, Green, Orange Team Check-In\n' +
+      '6:15PM - Purple, Pink, White Team Check-In\n' +
+      '6:30PM - Red, Yellow Team Check-In\n' +
+      '7:00 PM - Stand Up\n' +
+      '7:45 PM - Performances Begin\n' +
+      '8:30 PM - Dinner\n' +
+      '9:45 PM - Indoor Sports\n' +
+      '1:00 AM - Glow in the Dark Capture the Flag\n' +
+      '2:15 AM - Fetzer Field Day\n' +
+      '3:30 AM - Snack\n' +
+      '4:00 AM - Zumba\n' +
+      '4:45 AM - Senior Hour/Dodgeball\n' +
+      '6:30 AM - Kenan Sunrise Walk\n' +
+      '8:00 AM - Rave\n' +
+      '9:00 AM - Breakfast\n' +
+      '9:45 AM - Performances\n' +
+      '10:30 AM - Hedgehogs\n' +
+      '11:45 AM - Yoga\n' +
+      '12:30 PM - Lunch\n' +
+      '2:00 PM - Tar Heel Town\n' +
+      '4:10 PM - Final Jam\n' +
+      '5:00 PM - KCC Talent Show\n' +
+      '6:00 PM - Family Hour\n' +
+      '6:50 PM - Sway Time\n' +
+      '7:00 PM - Sit Down\n'
   },
   {
     'title': '​​When and where is the marathon?',
