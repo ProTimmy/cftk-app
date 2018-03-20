@@ -9,6 +9,7 @@ import {
   Keyboard,
   KeyboardAvoidingView,
   TouchableOpacity,
+  TouchableWithoutFeedback,
   Platform,
   Linking
 } from 'react-native'
@@ -23,6 +24,7 @@ export default class LoginScreen extends React.Component {
   constructor (props) {
     super(props)
     this.state = {
+      login: false,
       username: '',
       password: '',
       errorMessage: '',
@@ -77,7 +79,12 @@ export default class LoginScreen extends React.Component {
   }
 
   login () {
+    // Disable login button
     Keyboard.dismiss()
+    this.setState({
+      login: true
+    })
+
     if (this.state.username !== '') {
       if (this.state.password !== '') {
         Animated.timing(
@@ -96,7 +103,8 @@ export default class LoginScreen extends React.Component {
             })
           } else {
             this.setState({
-              errorMessage: response.code
+              errorMessage: response.code,
+              login: false
             })
           }
         })
@@ -106,58 +114,67 @@ export default class LoginScreen extends React.Component {
 
   render () {
     return (
-      <View style={{flexGrow: 1, flexDirection: 'column', justifyContent: 'center'}}>
-        <KeyboardAvoidingView
-          style={styles.container}
-          behavior='padding'
-        >
-          <View style={{flex: 2, justifyContent: 'center'}}>
-            <Animated.Image
-              source={require('../assets/images/carolinaftk_logo.png')}
-              style={[styles.logo, {height: this.imageHeight}]}
-            />
-          </View>
-          <View style={{flex: 1, alignItems: 'center'}}>
-            <View style={styles.error}>
-              <Text style={styles.errorMessage}>{this.state.errorMessage}</Text>
+      <TouchableWithoutFeedback
+        onPress={Keyboard.dismiss}
+        accessible={false}
+      >
+        <View style={{flexGrow: 1, flexDirection: 'column', justifyContent: 'center'}}>
+          <KeyboardAvoidingView
+            style={styles.container}
+            behavior='padding'
+          >
+            <View style={{flex: 2, justifyContent: 'center'}}>
+              <Animated.Image
+                source={require('../assets/images/carolinaftk_logo.png')}
+                style={[styles.logo, {height: this.imageHeight}]}
+              />
             </View>
-            <TouchableOpacity style={styles.forgot}
-              onPress={() => Linking.openURL('http://uncdm.convio.net/site/UserLogin?CMD=ForgotPassword')}>
-              <Text style={styles.forgotText}>Forgot Password?</Text>
-            </TouchableOpacity>
-            <TextInput
-              value={this.state.username}
-              placeholder='Username'
-              onChangeText={(username) => this.setState({username})}
-              style={styles.formInput}
-              autoCorrect={false}
-              returnKeyType='next'
-              autoCapitalize='none'
-              maxLength={30}
-              underlineColorAndroid='#fff'
-              onSubmitEditing={(event => {
-                this.refs.Password.focus()
-              })}
-            />
-            <TextInput
-              ref='Password'
-              value={this.state.password}
-              placeholder='Password'
-              secureTextEntry
-              onChangeText={(password) => this.setState({password})}
-              style={styles.formInput}
-              autoCorrect={false}
-              returnKeyType='done'
-              autoCapitalize='none'
-              maxLength={30}
-              underlineColorAndroid='#fff'
-            />
-            <TouchableOpacity style={styles.loginButton} onPress={this.login}>
-              <Text style={{color: 'white'}}>Login</Text>
-            </TouchableOpacity>
-          </View>
-        </KeyboardAvoidingView>
-      </View>
+            <View style={{flex: 1, alignItems: 'center'}}>
+              <View style={styles.error}>
+                <Text style={styles.errorMessage}>{this.state.errorMessage}</Text>
+              </View>
+              <TouchableOpacity style={styles.forgot}
+                onPress={() => Linking.openURL('http://uncdm.convio.net/site/UserLogin?CMD=ForgotPassword')}>
+                <Text style={styles.forgotText}>Forgot Password?</Text>
+              </TouchableOpacity>
+              <TextInput
+                value={this.state.username}
+                placeholder='Username'
+                onChangeText={(username) => this.setState({username})}
+                style={styles.formInput}
+                autoCorrect={false}
+                returnKeyType='next'
+                autoCapitalize='none'
+                maxLength={30}
+                underlineColorAndroid='#fff'
+                onSubmitEditing={(event => {
+                  this.refs.Password.focus()
+                })}
+              />
+              <TextInput
+                ref='Password'
+                value={this.state.password}
+                placeholder='Password'
+                secureTextEntry
+                onChangeText={(password) => this.setState({password})}
+                style={styles.formInput}
+                autoCorrect={false}
+                returnKeyType='done'
+                autoCapitalize='none'
+                maxLength={30}
+                underlineColorAndroid='#fff'
+              />
+              <TouchableOpacity
+                style={styles.loginButton}
+                onPress={this.login}
+                disabled={this.state.login}
+              >
+                <Text style={{color: 'white'}}>Login</Text>
+              </TouchableOpacity>
+            </View>
+          </KeyboardAvoidingView>
+        </View>
+      </TouchableWithoutFeedback>
     )
   }
 }
