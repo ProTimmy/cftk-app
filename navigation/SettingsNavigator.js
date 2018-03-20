@@ -1,6 +1,25 @@
 import React from 'react'
 import { StackNavigator } from 'react-navigation'
 import SettingsScreen from '../screens/SettingsScreen'
+import TeamRoster from '../screens/TeamRosterScreen'
+import PersonalMessage from '../screens/PersonalMessageScreen'
+
+import Colors from '../constants/Colors'
+
+const styles = {
+  header: {
+    padding: 30,
+    paddingTop: 45,
+    backgroundColor: Colors.carolinaBlue,
+    // Android styles only
+    elevation: 5
+  },
+  title: {
+    fontWeight: 'bold',
+    fontSize: 24,
+    color: '#004763'
+  }
+}
 
 const SettingsNav = StackNavigator(
   {
@@ -8,6 +27,22 @@ const SettingsNav = StackNavigator(
       screen: SettingsScreen,
       navigationOptions: {
         header: null
+      }
+    },
+    Roster: {
+      screen: TeamRoster,
+      navigationOptions: {
+        title: 'Team Roster',
+        headerStyle: styles.header,
+        headerTitleStyle: styles.title
+      }
+    },
+    PersonalMessage: {
+      screen: PersonalMessage,
+      navigationOptions: {
+        title: 'Message',
+        headerStyle: styles.header,
+        headerTitleStyle: styles.title
       }
     }
   },
