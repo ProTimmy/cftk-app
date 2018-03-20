@@ -64,7 +64,7 @@ const questions = [
   },
   {
     'title': '​How do I raise my money?',
-    'body': '\tHowever you want! We have found that reaching out to friends and family via social media and/or email is very effective. You can also hold events where the proceeds go to your dancer total! In addition, your team captain is a great resource for you in terms of fundraising ideas. You should also feel free to reach out to anyone from the Executive Board about fundraising ideas. Find their contact information here: http://www.carolinaftk.org/contact.'
+    'body': '\tHowever you want! We have found that reaching out to friends and family via social media and/or email is very effective. You can also hold events where the proceeds go to your dancer total! In addition, your team captain is a great resource for you in terms of fundraising ideas. You should also feel free to reach out to anyone from the Executive Board about fundraising ideas.'
   },
   {
     'title': '​​How do I sign up?',
@@ -104,7 +104,7 @@ const styles = StyleSheet.create({
   scrollContainer: {
     flexGrow: 1
   },
-  mapHeader: {
+  header: {
     paddingTop: 15,
     paddingRight: 15,
     paddingLeft: 15,
@@ -113,7 +113,7 @@ const styles = StyleSheet.create({
     borderColor: 'rgba(0,0,0,0.2)',
     backgroundColor: '#f9f9f9'
   },
-  mapHeaderText: {
+  headerText: {
     textAlign: 'center',
     fontWeight: 'bold',
     fontSize: 20
@@ -131,8 +131,8 @@ const styles = StyleSheet.create({
 })
 
 const MapHeader = ({ isOpen }) =>
-  <View style={styles.mapHeader}>
-    <Text style={styles.mapHeaderText}>Map</Text>
+  <View style={styles.header}>
+    <Text style={styles.headerText}>Map</Text>
   </View>
 
 const MapContent = (

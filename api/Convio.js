@@ -54,10 +54,6 @@ export function login (username, password) {
   })
 }
 
-export function logout () {
-  return 'something'
-}
-
 export function getDancerInfo (consID, token) {
   var dancerInfoRequestURL = 'https://secure2.convio.net/' + API_KEY + '/site/CRTeamraiserAPI'
   var requestParameters = 'method=getParticipantProgress&' +
@@ -102,7 +98,7 @@ function getTeamName (consID) {
     'api_key=' + API_KEY + '&' +
     'v=1.0&' +
     'response_format=json&' +
-    'cons_id=' + consID + '&'
+    'cons_id=' + consID
   var requestMethod = 'POST'
 
   return sendRequest(requestURL, requestParameters, requestMethod).then(function (response) {
@@ -118,9 +114,25 @@ function getTeamName (consID) {
 }
 
 // Functions for the settings page
-export function updatePersonalPagePrivacy (update, token) {
+export function updatePersonalGoal (token, newGoal) {
   var requestURL = 'https://secure2.convio.net/' + API_KEY + '/site/CRTeamraiserAPI'
-  var requestParameters = 'method=updatePersonalPagePrivacy&' +
+  var requestParameters = 'method=updateRegistration&' +
+    'api_key=' + API_KEY + '&' +
+    'v=1.0&' +
+    'response_format=json&' +
+    'goal=' + newGoal + '&' +
+    'fr_id=' + EVENT_ID + '&' +
+    'sso_auth_token=' + token
+  var requestMethod = 'POST'
+
+  return sendRequest(requestURL, requestParameters, requestMethod).then(function (response) {
+    return response
+  })
+}
+
+function getTeamID (token) {
+  var requestURL = 'https://secure2.convio.net/' + API_KEY + '/site/CRTeamraiserAPI'
+  var requestParameters = 'method=getRegistration&' +
     'api_key=' + API_KEY + '&' +
     'v=1.0&' +
     'response_format=json&' +
@@ -129,6 +141,41 @@ export function updatePersonalPagePrivacy (update, token) {
   var requestMethod = 'POST'
 
   return sendRequest(requestURL, requestParameters, requestMethod).then(function (response) {
-    return response
+    return response.getRegistrationResponse.registration.teamId
+  })
+}
+
+export function getTeamRoster (token) {
+  return getTeamID(token).then(function (teamID) {
+    var requestURL = 'https://secure2.convio.net/' + API_KEY + '/site/CRTeamraiserAPI'
+    var requestParameters = 'method=getTeamRoster&' +
+      'api_key=' + API_KEY + '&' +
+      'v=1.0&' +
+      'response_format=json&' +
+      'fr_id=' + EVENT_ID + '&' +
+      'team_id=' + teamID + '&' +
+      'sso_auth_token=' + token
+    var requestMethod = 'POST'
+
+    return sendRequest(requestURL, requestParameters, requestMethod).then(function (roster) {
+      roster = roster.getTeamRosterResponse.teamMember
+      return roster
+    })
+  })
+}
+
+export function getPersonalPage (consID, token) {
+  var requestURL = 'https://secure2.convio.net/' + API_KEY + '/site/CRTeamraiserAPI'
+  var requestParameters = 'method=getPersonalPageInfo&' +
+    'api_key=' + API_KEY + '&' +
+    'v=1.0&' +
+    'response_format=json&' +
+    'cons_id=' + consID + '&' +
+    'fr_id=' + EVENT_ID + '&' +
+    'sso_auth_token=' + token
+  var requestMethod = 'POST'
+
+  return sendRequest(requestURL, requestParameters, requestMethod).then(function (preview) {
+    return preview
   })
 }
