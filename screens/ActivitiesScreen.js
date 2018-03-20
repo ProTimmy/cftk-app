@@ -1,7 +1,6 @@
 import React from 'react'
 import {
-  View,
-  StyleSheet
+  View
 } from 'react-native'
 import QRScanner from '../components/QRScanner'
 import Timer from '../components/Timer'
