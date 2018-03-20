@@ -12,6 +12,7 @@ import {
 import TitleText from '../components/TitleText'
 import Accordion from '@ercpereda/react-native-accordion'
 import ModAccordion from '../components/ModAccordion'
+import Layout from '../constants/Layout'
 
 const questions = [
   {
@@ -111,22 +112,37 @@ const styles = StyleSheet.create({
     paddingBottom: 15,
     borderTopWidth: 1,
     borderColor: 'rgba(0,0,0,0.2)',
-    backgroundColor: '#f9f9f9'
+    backgroundColor: 'white'
   },
   headerText: {
     textAlign: 'center',
     fontWeight: 'bold',
     fontSize: 20
   },
-  mapBody: {
+  body: {
     display: 'flex',
-    backgroundColor: '#f9f9f9',
+    backgroundColor: 'white',
     flexDirection: 'column',
     alignItems: 'center'
   },
   map: {
     height: 200,
     margin: 20
+  },
+  sponsor: {
+    marginTop: 20,
+    marginBottom: 20
+  },
+  sponsorTitle: {
+    textAlign: 'center',
+    fontSize: 18,
+    fontWeight: 'bold',
+    textDecorationLine: 'underline'
+  },
+  sponsorLogo: {
+    margin: 20,
+    maxHeight: 200,
+    maxWidth: Layout.width
   }
 })
 
@@ -136,7 +152,7 @@ const MapHeader = ({ isOpen }) =>
   </View>
 
 const MapContent = (
-  <View style={styles.mapBody}>
+  <View style={styles.body}>
     <Image
       style={styles.map}
       resizeMode='contain'
@@ -150,20 +166,75 @@ const MapContent = (
   </View>
 )
 
+const SponsorsHeader = ({ isOpen }) =>
+  <View style={styles.header}>
+    <Text style={styles.headerText}>Sponsors</Text>
+  </View>
+
+const SponsorsBody = (
+  <View style={styles.body}>
+    <View style={styles.sponsor}>
+      <Text style={styles.sponsorTitle}>Coastal Federal Credit Union</Text>
+      <Image
+        style={styles.sponsorLogo}
+        resizeMode='contain'
+        source={require('../assets/images/coastal.jpg')}
+      />
+    </View>
+    <View style={styles.sponsor}>
+      <Text style={styles.sponsorTitle}>Carolina Dining Services</Text>
+      <Image
+        style={styles.sponsorLogo}
+        resizeMode='contain'
+        source={require('../assets/images/cds.png')}
+      />
+    </View>
+    <View style={styles.sponsor}>
+      <Text style={styles.sponsorTitle}>Chapel View and Chapel Ridge Apartments</Text>
+      <Image
+        style={styles.sponsorLogo}
+        resizeMode='contain'
+        source={require('../assets/images/viewridge.png')}
+      />
+    </View>
+    <View style={styles.sponsor}>
+      <Text style={styles.sponsorTitle}>KIND</Text>
+      <Image
+        style={styles.sponsorLogo}
+        resizeMode='contain'
+        source={require('../assets/images/kind.jpg')}
+      />
+    </View>
+    <View style={styles.sponsor}>
+      <Text style={styles.sponsorTitle}>Northwestern Mutual</Text>
+      <Image
+        style={styles.sponsorLogo}
+        resizeMode='contain'
+        source={require('../assets/images/northwestern.jpg')}
+      />
+    </View>
+  </View>
+)
+
 export default class FAQScreen extends React.Component {
   render () {
     return (
       <View style={styles.container}>
         <TitleText titleText='FAQ' />
         <ScrollView contentContainerStyle={styles.scrollContainer}>
-          <ModAccordion
-            title={questions[0].title}
-            body={questions[0].body}
-          />
           <Accordion
             header={MapHeader}
             content={MapContent}
             duration={300}
+          />
+          <Accordion
+            header={SponsorsHeader}
+            content={SponsorsBody}
+            duration={300}
+          />
+          <ModAccordion
+            title={questions[0].title}
+            body={questions[0].body}
           />
           <ModAccordion
             title={questions[1].title}

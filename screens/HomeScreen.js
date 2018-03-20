@@ -70,7 +70,8 @@ export default class HomeScreen extends React.Component {
   render () {
     return (
       <View style={styles.container}>
-        <TitleText style={styles.title} titleText={this.state.name} />
+        {/* <TitleText style={styles.title} titleText={this.state.name} /> */}
+        <TitleText style={styles.title} titleText='Test User' />
         <View>
           <Text style={styles.days}>Days Left: {this.state.daysLeft}</Text>
           <View style={{borderTopWidth: 1.25, borderColor: Colors.charcoal}}>

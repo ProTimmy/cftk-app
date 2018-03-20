@@ -11,7 +11,7 @@ import AwesomeAlert from 'react-native-awesome-alerts'
 
 import TitleText from '../components/TitleText'
 import Colors from '../constants/Colors'
-import { getDancerInfo, updatePersonalGoal } from '../api/Convio'
+import { getDancerInfo, updatePersonalGoal, getPersonalPage } from '../api/Convio'
 import Layout from '../constants/Layout'
 
 export default class SettingsScreen extends React.Component {
@@ -72,7 +72,6 @@ export default class SettingsScreen extends React.Component {
       }, () => {
         // Parsing for Convio
         goal = (goal * 100).toString()
-        console.log(goal)
 
         let that = this
         updatePersonalGoal(this.state.token, goal).then(function (response) {
@@ -97,14 +96,18 @@ export default class SettingsScreen extends React.Component {
         <TitleText style={styles.title} titleText='Settings' />
         <View style={styles.menuContainer}>
           <TouchableOpacity style={styles.button}
+            onPress={() => {
+              getPersonalPage(this.state.token).then(function (response) {
+                Linking.openURL(response)
+              })
+            }}
+          >
+            <Text style={styles.buttonText}>View Personal Page</Text>
+          </TouchableOpacity>
+          <TouchableOpacity style={styles.button}
             onPress={() => this.setState({updateGoalVisible: true})}
           >
             <Text style={styles.buttonText}>Change Fundraising Goal</Text>
-          </TouchableOpacity>
-          <TouchableOpacity style={styles.button}
-            onPress={() => this.props.navigation.navigate('PersonalMessage')}
-          >
-            <Text style={styles.buttonText}>Change Personal Message</Text>
           </TouchableOpacity>
           <TouchableOpacity style={styles.button}
             onPress={() => this.props.navigation.navigate('Roster')}
@@ -139,7 +142,7 @@ export default class SettingsScreen extends React.Component {
         <AwesomeAlert
           show={this.state.showFail}
           showProgress={false}
-          title='Could not update goal...'
+          title='Could not update...'
           closeOnTouchOutside
           closeOnHardwareBackPress
           showConfirmButton

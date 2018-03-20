@@ -164,18 +164,17 @@ export function getTeamRoster (token) {
   })
 }
 
-export function getPersonalPage (consID, token) {
+export function getPersonalPage (token) {
   var requestURL = 'https://secure2.convio.net/' + API_KEY + '/site/CRTeamraiserAPI'
-  var requestParameters = 'method=getPersonalPageInfo&' +
+  var requestParameters = 'method=getShortcut&' +
     'api_key=' + API_KEY + '&' +
     'v=1.0&' +
     'response_format=json&' +
-    'cons_id=' + consID + '&' +
     'fr_id=' + EVENT_ID + '&' +
     'sso_auth_token=' + token
   var requestMethod = 'POST'
 
-  return sendRequest(requestURL, requestParameters, requestMethod).then(function (preview) {
-    return preview
+  return sendRequest(requestURL, requestParameters, requestMethod).then(function (page) {
+    return page.getShortcutResponse.shortcutItem.url
   })
 }

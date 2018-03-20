@@ -43,7 +43,7 @@ const styles = StyleSheet.create({
     paddingBottom: 15,
     borderTopWidth: 1,
     borderColor: 'rgba(0,0,0,0.2)',
-    backgroundColor: '#f9f9f9'
+    backgroundColor: 'white'
   },
   headerText: {
     textAlign: 'center',
@@ -52,7 +52,7 @@ const styles = StyleSheet.create({
   },
   body: {
     display: 'flex',
-    backgroundColor: '#f9f9f9'
+    backgroundColor: 'white'
   },
   bodyText: {
     fontSize: 15,

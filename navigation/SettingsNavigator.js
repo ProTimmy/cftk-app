@@ -2,7 +2,6 @@ import React from 'react'
 import { StackNavigator } from 'react-navigation'
 import SettingsScreen from '../screens/SettingsScreen'
 import TeamRoster from '../screens/TeamRosterScreen'
-import PersonalMessage from '../screens/PersonalMessageScreen'
 
 import Colors from '../constants/Colors'
 
@@ -33,14 +32,6 @@ const SettingsNav = StackNavigator(
       screen: TeamRoster,
       navigationOptions: {
         title: 'Team Roster',
-        headerStyle: styles.header,
-        headerTitleStyle: styles.title
-      }
-    },
-    PersonalMessage: {
-      screen: PersonalMessage,
-      navigationOptions: {
-        title: 'Message',
         headerStyle: styles.header,
         headerTitleStyle: styles.title
       }

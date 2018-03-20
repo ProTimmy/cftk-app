@@ -23,7 +23,6 @@ export default class TeamRoster extends React.Component {
     // this.props.screenProps.id
     var that = this
     getTeamRoster(this.props.screenProps.token).then(function (roster) {
-      console.log(roster)
       that.setState({
         roster: roster
       })
