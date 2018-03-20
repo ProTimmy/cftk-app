@@ -73,7 +73,7 @@ export default class HomeScreen extends React.Component {
         <TitleText style={styles.title} titleText={this.state.name} />
         <View>
           <Text style={styles.days}>Days Left: {this.state.daysLeft}</Text>
-          <View style={{borderTopWidth: 1.25, borderColor: Colors.coral}}>
+          <View style={{borderTopWidth: 1.25, borderColor: Colors.charcoal}}>
             <Text style={styles.subtitle}>Personal Fundraising</Text>
             <View style={styles.panel}>
               <View style={styles.information}>
@@ -99,7 +99,7 @@ export default class HomeScreen extends React.Component {
               </View>
             </View>
           </View>
-          <View style={{borderTopWidth: 1.25, borderColor: Colors.coral}}>
+          <View style={{borderTopWidth: 2, borderColor: Colors.charcoal}}>
             <Text style={styles.subtitle}>{this.state.teamName}</Text>
           </View>
           {/* <Text style={styles.subtitle}>{this.state.teamName}</Text> */}
@@ -143,7 +143,8 @@ const styles = StyleSheet.create({
     textAlign: 'center',
     justifyContent: 'center',
     padding: 20,
-    backgroundColor: '#ECECEC'
+    backgroundColor: Colors.charcoal,
+    color: 'white'
   },
   subtitle: {
     fontWeight: 'bold',

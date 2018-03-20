@@ -21,6 +21,7 @@ const styles = {
     padding: 30,
     paddingTop: 45,
     backgroundColor: Colors.carolinaBlue,
+    color: '#004763',
     // Android styles only
     elevation: 5
   }
