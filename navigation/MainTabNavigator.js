@@ -9,7 +9,7 @@ import { Ionicons } from '@expo/vector-icons'
 // Import all screens
 import HomeScreen from '../screens/HomeScreen'
 import CalendarScreen from '../screens/CalendarScreen'
-import SettingsScreen from '../screens/SettingsScreen'
+import SettingsNavigator from '../navigation/SettingsNavigator'
 import ActivitiesScreen from '../screens/ActivitiesScreen'
 import FAQScreen from '../screens/FAQScreen'
 
@@ -28,7 +28,7 @@ export default TabNavigator(
       screen: ActivitiesScreen
     },
     Settings: {
-      screen: SettingsScreen
+      screen: SettingsNavigator
     }
   },
   {
