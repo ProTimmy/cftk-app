@@ -1,6 +1,7 @@
 import React from 'react'
 import {
-  Text
+  Text,
+  Platform
 } from 'react-native'
 import Colors from '../constants/Colors'
 
@@ -18,8 +19,8 @@ const styles = {
     fontSize: 24,
     textAlign: 'center',
     justifyContent: 'center',
-    padding: 30,
-    paddingTop: 45,
+    padding: Platform.OS === 'ios' ? 30 : 25,
+    paddingTop: Platform.OS === 'ios' ? 45 : 25,
     backgroundColor: Colors.carolinaBlue,
     color: '#004763',
     // Android styles only

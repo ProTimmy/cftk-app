@@ -122,6 +122,7 @@ export default class LoginScreen extends React.Component {
           <KeyboardAvoidingView
             style={styles.container}
             behavior='padding'
+            keyboardVerticalOffset={Platform.OS === 'android' ? 45 : 0}
           >
             <View style={{flex: 2, justifyContent: 'center'}}>
               <Animated.Image

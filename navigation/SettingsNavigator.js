@@ -1,4 +1,5 @@
 import React from 'react'
+import { Platform } from 'react-native'
 import { StackNavigator } from 'react-navigation'
 import SettingsScreen from '../screens/SettingsScreen'
 import TeamRoster from '../screens/TeamRosterScreen'
@@ -8,7 +9,7 @@ import Colors from '../constants/Colors'
 const styles = {
   header: {
     padding: 30,
-    paddingTop: 45,
+    paddingTop: Platform.OS === 'ios' ? 45 : 30,
     backgroundColor: Colors.carolinaBlue,
     // Android styles only
     elevation: 5

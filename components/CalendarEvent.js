@@ -149,10 +149,12 @@ const styles = StyleSheet.create({
   date: {
     overflow: 'hidden',
     borderBottomLeftRadius: 10,
-    borderTopLeftRadius: 10
+    borderTopLeftRadius: 10,
+    // Android styles only
+    elevation: 5
   },
   dateText: {
-    padding: 40,
+    padding: 42,
     paddingRight: 20,
     paddingLeft: 20,
     backgroundColor: Colors.steelBlue,
