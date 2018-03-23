@@ -27,12 +27,9 @@ export default class SettingsScreen extends React.Component {
       consID: this.props.screenProps.id,
       token: this.props.screenProps.token,
       fundraisingGoal: '0',
-      showSuccess: false,
-      showFail: false,
       updateGoalVisible: false
     }
 
-    this.hideAlert = this.hideAlert.bind(this)
     this.updatePersonalFundraising = this.updatePersonalFundraising.bind(this)
   }
 
@@ -55,17 +52,9 @@ export default class SettingsScreen extends React.Component {
     return parsedMoney.toString().replace(/(\d)(?=(\d\d\d)+(?!\d))/g, '$1,')
   }
 
-  hideAlert () {
-    this.setState({
-      showSuccess: false,
-      showFail: false
-    })
-  }
-
   updatePersonalFundraising (goal) {
     goal = goal.replace('$', '')
     goal = parseFloat(goal).toFixed(2)
-    var parsedGoal = goal
     if (!isNaN(goal)) {
       this.setState({
         updateGoalVisible: false
@@ -73,17 +62,11 @@ export default class SettingsScreen extends React.Component {
         // Parsing for Convio
         goal = (goal * 100).toString()
 
-        let that = this
         updatePersonalGoal(this.state.token, goal).then(function (response) {
           if (response.updateRegistrationResponse !== null) {
-            that.setState({
-              showSuccess: true,
-              fundraisingGoal: parsedGoal
-            })
+            window.alert('Success!')
           } else {
-            that.setState({
-              showFail: true
-            })
+            window.alert('Could not update fundraising goal...')
           }
         })
       })
@@ -95,6 +78,33 @@ export default class SettingsScreen extends React.Component {
       <View style={styles.container}>
         <TitleText style={styles.title} titleText='Settings' />
         <View style={styles.menuContainer}>
+          <AwesomeAlert
+            show={this.state.showSuccess}
+            style={styles.alert}
+            showProgress={false}
+            title='Success!'
+            closeOnTouchOutside
+            closeOnHardwareBackPress
+            showConfirmButton
+            confirmText='OK'
+            confirmButtonColor={Colors.carolinaBlue}
+            onConfirmPressed={() => {
+              this.hideAlert()
+            }}
+          />
+          <AwesomeAlert
+            show={this.state.showFail}
+            showProgress={false}
+            title='Could not update...'
+            closeOnTouchOutside
+            closeOnHardwareBackPress
+            showConfirmButton
+            confirmText='OK'
+            confirmButtonColor={Colors.carolinaBlue}
+            onConfirmPressed={() => {
+              this.hideAlert()
+            }}
+          />
           <TouchableOpacity style={styles.button}
             onPress={() => {
               getPersonalPage(this.state.token).then(function (response) {
@@ -126,32 +136,6 @@ export default class SettingsScreen extends React.Component {
           visible={this.state.updateGoalVisible}
           onCancel={() => this.setState({updateGoalVisible: false})}
           onSubmit={(value) => this.updatePersonalFundraising(value)} />
-        <AwesomeAlert
-          show={this.state.showSuccess}
-          showProgress={false}
-          title='Success!'
-          closeOnTouchOutside
-          closeOnHardwareBackPress
-          showConfirmButton
-          confirmText='OK'
-          confirmButtonColor={Colors.carolinaBlue}
-          onConfirmPressed={() => {
-            this.hideAlert()
-          }}
-        />
-        <AwesomeAlert
-          show={this.state.showFail}
-          showProgress={false}
-          title='Could not update...'
-          closeOnTouchOutside
-          closeOnHardwareBackPress
-          showConfirmButton
-          confirmText='OK'
-          confirmButtonColor={Colors.carolinaBlue}
-          onConfirmPressed={() => {
-            this.hideAlert()
-          }}
-        />
       </View>
     )
   }
@@ -175,6 +159,7 @@ const styles = StyleSheet.create({
     alignItems: 'center',
     backgroundColor: Colors.coral,
     borderRadius: 5,
+    zIndex: 1,
     // Android only
     elevation: 5
   },
@@ -182,5 +167,9 @@ const styles = StyleSheet.create({
     color: 'whitesmoke',
     fontWeight: 'bold',
     fontSize: 16
+  },
+  alert: {
+    zIndex: 1000,
+    elevation: 6
   }
 })
