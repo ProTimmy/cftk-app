@@ -18,7 +18,7 @@
     },
     "android": {
       "package": "com.cftk.carolinaftk",
-      "versionCode": 1,
+      "versionCode": 2,
       "icon": "./assets/images/transparent_logo.png",
       "permissions": ["CAMERA"]
     }
